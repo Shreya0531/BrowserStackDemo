@@ -1,6 +1,8 @@
 package org.browserStack.tests;
 
 import org.browserStack.base.BaseTest;
+import org.browserStack.dataproviders.TestDataProvider;
+import org.browserStack.flows.AddToCartFlow;
 import org.browserStack.flows.LoginFlow;
 import org.browserStack.pages.ProductPage;
 import org.testng.annotations.BeforeMethod;
@@ -13,15 +15,9 @@ public class AddToCartTest extends BaseTest {
         loginFlow.login(userName,password);
     }
 
-    @Test
-    public void addProductToCartAndCheckout(){
-        ProductPage productPage = new ProductPage(driver);
-
-        String product1 = "iPhone 12";
-        String product2 = "iPhone 12 Mini";
-
-        productPage.clickOnProductAddToCart(product1);
-        productPage.getProductAddToCart(product2);
-        productPage.clickOnCheckoutbutton();
+    @Test(dataProvider = "productData", dataProviderClass = TestDataProvider.class)
+    public void addProductToCartAndCheckout(String product1, String product2) {
+        AddToCartFlow addToCartFlow = new AddToCartFlow(driver);
+        addToCartFlow.addToCart(product1,product2);
     }
 }
