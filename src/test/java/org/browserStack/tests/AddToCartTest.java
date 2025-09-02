@@ -4,7 +4,6 @@ import org.browserStack.base.BaseTest;
 import org.browserStack.dataproviders.TestDataProvider;
 import org.browserStack.flows.AddToCartFlow;
 import org.browserStack.flows.LoginFlow;
-import org.browserStack.pages.ProductPage;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,5 +18,9 @@ public class AddToCartTest extends BaseTest {
     public void addProductToCartAndCheckout(String product1, String product2) {
         AddToCartFlow addToCartFlow = new AddToCartFlow(driver);
         addToCartFlow.addToCart(product1,product2);
+
+
+
+
     }
 }
