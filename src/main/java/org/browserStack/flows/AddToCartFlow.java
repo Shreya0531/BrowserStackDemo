@@ -1,18 +1,19 @@
 package org.browserStack.flows;
 
-import org.browserStack.pages.ProductPage;
+import org.browserStack.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 
 public class AddToCartFlow {
-    ProductPage productPage;
+    HomePage homePage;
 
    public AddToCartFlow(WebDriver driver){
-        this.productPage = new ProductPage(driver);
+        this.homePage = new HomePage(driver);
     }
 
     public void addToCart(String product1, String product2){
-        productPage.clickOnProductAddToCart(product1);
-        productPage.clickOnProductAddToCart(product2);
-        productPage.clickOnCheckoutbutton();
+        homePage.clickOnProductAddToCart(product1);
+        homePage.clickOnProductAddToCart(product2);
+        homePage.clickOnCheckoutbutton();
     }
+
 }
