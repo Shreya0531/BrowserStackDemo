@@ -6,16 +6,7 @@ import org.testng.annotations.DataProvider;
 public class TestDataProvider {
     static String environment = System.getProperty("env","qa");
 
-    @DataProvider(name = "productData")
-    public static Object[][] getProductData(){
-        return new Object[][]{
-                {
-                        ConfigManager.getProducts(environment, "product1"),
-                        ConfigManager.getProducts(environment, "product2")
-                }
-        };
-    }
-
+    @DataProvider(name = "checkoutData")
     public static Object[][] getCheckoutData(){
         return new Object[][]{
                 {

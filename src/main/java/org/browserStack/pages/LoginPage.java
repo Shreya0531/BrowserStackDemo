@@ -14,7 +14,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
     public void clickOnSignIn(){
         click(SIGNIN_BTN);

@@ -3,6 +3,9 @@ package org.browserStack.flows;
 import org.browserStack.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 
+
+import java.util.List;
+
 public class AddToCartFlow {
     HomePage homePage;
 
@@ -10,10 +13,16 @@ public class AddToCartFlow {
         this.homePage = new HomePage(driver);
     }
 
-    public void addToCart(String product1, String product2){
-        homePage.clickOnProductAddToCart(product1);
-        homePage.clickOnProductAddToCart(product2);
-        homePage.clickOnCheckoutbutton();
+    public void addRandomProductsToCart(int count){
+       homePage.addMultipleRandomProductsToCart(count);
+    }
+
+    public void proceedToCheckout(){
+       homePage.clickOnCheckoutbutton();
+    }
+
+    public List<String> getAllProductsList(){
+       return homePage.getAllProductNames();
     }
 
 }
