@@ -15,8 +15,7 @@ public class CheckoutPage extends BasePage{
     By submit_Btn = By.id("checkout-shipping-continue");
 
     public CheckoutPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        super(driver);
     }
 
     public void enterCheckoutDetails(String firstName, String lastName,

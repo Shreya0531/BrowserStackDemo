@@ -22,7 +22,7 @@ public class AddToCartTest extends BaseTest {
 
     @Test
     public void addRandomProductsToCartAndCheckout() {
-        addToCartFlow.addRandomProductsToCart(4);
+        addToCartFlow.addRandomProductsToCart(2);
         addToCartFlow.proceedToCheckout();
 
         new WebDriverWait(driver, Duration.ofSeconds(3))

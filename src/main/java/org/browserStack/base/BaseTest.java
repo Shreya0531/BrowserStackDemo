@@ -2,7 +2,9 @@ package org.browserStack.base;
 
 import org.browserStack.utils.ConfigManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -13,10 +15,12 @@ public class BaseTest {
     String environment;
     protected String userName;
     protected String password;
+    protected static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeMethod
     public void setUp(){
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
         environment = System.getProperty("env","qa");
@@ -25,6 +29,7 @@ public class BaseTest {
         if (baseUrl == null){
             throw new RuntimeException("base url not configured");
         }
+        logger.debug("Navigating to URL: {}",baseUrl);
         driver.get(baseUrl);
 
         userName = ConfigManager.getUsername(environment);
@@ -37,6 +42,7 @@ public class BaseTest {
     @AfterMethod
     public void tearDown(){
         if (driver!= null){
+            logger.info("Closing the browser");
             driver.quit();
         }
     }

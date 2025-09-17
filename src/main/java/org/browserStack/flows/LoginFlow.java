@@ -10,7 +10,6 @@ public class LoginFlow {
         this.loginPage = new LoginPage(driver);
     }
 
-
     public void login(String username, String password){
         loginPage.clickOnSignIn();
         loginPage.enterLoginDetails(username, password);

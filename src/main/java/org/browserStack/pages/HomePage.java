@@ -3,8 +3,6 @@ package org.browserStack.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
@@ -12,10 +10,9 @@ public class HomePage extends BasePage {
     By PRODUCT_NAMES = By.cssSelector(".shelf-container .shelf-item__title");
     By PRODUCT_ADD_BUTTONS = By.cssSelector(".shelf-container .shelf-item__buy-btn");
     By CHECKOUT_BTN = By.cssSelector(".buy-btn");
-    By USERNAME_ELEMENT = By.className("username");
+    By USERNAME_ELEMENT = By.cssSelector(".username");
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     public List<String> getAllProductNames(){
@@ -26,6 +23,7 @@ public class HomePage extends BasePage {
     }
 
     public void addRandomProductToCart(){
+
         List<WebElement> addToCartButtons = driver.findElements(PRODUCT_ADD_BUTTONS);
         if(addToCartButtons.isEmpty()){
             throw new RuntimeException("No products found");
