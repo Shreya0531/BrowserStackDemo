@@ -3,59 +3,53 @@ package org.browserStack.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class HomePage extends BasePage {
     By PRODUCT_NAMES = By.cssSelector(".shelf-container .shelf-item__title");
     By PRODUCT_ADD_BUTTONS = By.cssSelector(".shelf-container .shelf-item__buy-btn");
     By CHECKOUT_BTN = By.cssSelector(".buy-btn");
     By USERNAME_ELEMENT = By.cssSelector(".username");
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public List<String> getAllProductNames(){
-        List<WebElement> productElements = driver.findElements(PRODUCT_NAMES);
-        return productElements.stream()
-                .map(WebElement::getText)
-                .toList();
+    public By getProductAddToCartButton(String productName) {
+        return By.xpath("//p[text()='" + productName + "']/following-sibling::div[text()='Add to cart']");
     }
 
-    public void addRandomProductToCart(){
+    public List<WebElement> getAllProductNames() {
+        return driver.findElements(PRODUCT_NAMES);
+    }
 
-        List<WebElement> addToCartButtons = driver.findElements(PRODUCT_ADD_BUTTONS);
-        if(addToCartButtons.isEmpty()){
-            throw new RuntimeException("No products found");
+    public List<String> getAllProductsNamesInString() {
+        List<String> products = new ArrayList<>();
+        for (WebElement product : getAllProductNames()) {
+            products.add(product.getText());
         }
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(addToCartButtons.size());
-        clickElement(addToCartButtons.get(randomIndex));
+        return products;
     }
 
-    public void addMultipleRandomProductsToCart(int count){
-        for (int i = 0; i < count; i++) {
-            addRandomProductToCart();
-        }
+    public String getRandomProductName() {
+        List<String> products = getAllProductsNamesInString();
+        Collections.shuffle(products);
+        return products.get(0);
     }
 
-    private void clickElement(WebElement element){
-        wait.until(driver1 -> {
-            try {
-                element.click();
-                return true;
-            }
-            catch (Exception e){
-                return false;
-            }
-        });
+    public void clickOnProduct(String product) {
+        click(getProductAddToCartButton(product));
     }
+
     public String getUsernameText() {
         return getText(USERNAME_ELEMENT);
     }
 
-    public void clickOnCheckoutbutton(){
+    public void clickOnCheckoutButton() {
+        waitForClickable(CHECKOUT_BTN, 10);
         click(CHECKOUT_BTN);
     }
 }
