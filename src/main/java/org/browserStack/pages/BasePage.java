@@ -10,7 +10,6 @@ import java.time.Duration;
 
 public class BasePage {
     protected WebDriver driver;
-    WebDriverWait wait;
     protected static final Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public BasePage(WebDriver driver) {
@@ -20,6 +19,11 @@ public class BasePage {
     public void waitForVisibility(By locator, int timeout){
         new WebDriverWait(driver,Duration.ofSeconds(timeout))
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public void waitForClickable(By locator, int timeout){
+        new WebDriverWait(driver,Duration.ofSeconds(timeout))
+                .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public void click(By locator){
@@ -34,6 +38,7 @@ public class BasePage {
         WebElement element = driver.findElement(locator);
         element.sendKeys(text);
     }
+
     public void sendKeysAndEnter(String text, By locator){
         logger.info("Entering text: {} into element: {}",text,locator);
         WebElement element = driver.findElement(locator);
