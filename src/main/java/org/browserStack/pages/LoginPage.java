@@ -2,9 +2,6 @@ package org.browserStack.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LoginPage extends BasePage {
     public static final By SIGNIN_BTN = By.id("signin");
@@ -13,8 +10,7 @@ public class LoginPage extends BasePage {
     public static final By LOGIN_BTN = By.id("login-btn");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
     public void clickOnSignIn(){
         click(SIGNIN_BTN);
@@ -24,6 +20,7 @@ public class LoginPage extends BasePage {
         sendKeysAndEnter(password,PASSWORD_INPUT);
     }
     public void clickLoginButton(){
+        waitForVisibility(LOGIN_BTN,5);
         click(LOGIN_BTN);
     }
 

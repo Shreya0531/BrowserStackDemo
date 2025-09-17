@@ -35,10 +35,6 @@ public class ConfigManager {
         return getProperty(environment + ".password");
     }
 
-    public static String getProducts(String environment, String productKey){
-        return getProperty(environment + "." +productKey);
-    }
-
     public static String getCheckoutDetails(String environment, String dataKey){
         return getProperty(environment + "." + dataKey);
     }
